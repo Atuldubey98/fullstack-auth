@@ -1,0 +1,6 @@
+.page__layout {
+  display: flex;
+}
+.page__layoutBody{
+    width: 100%;
+}

@@ -1,0 +1,54 @@
+import { createContext, useState } from "react";
+
+export const UIContext = createContext();
+
+export const UIContextProvider = ({ children }) => {
+  const [sideBar, setSideBar] = useState(false);
+  const [modalIsOpen, setIsOpen] = useState(false);
+  const [theme, setTheme] = useState(() => {
+    if (localStorage.getItem("theme")) {
+      return JSON.parse(localStorage.getItem("theme"));
+    }
+    return { isDark: false };
+  });
+  const onSideBarToggle = () => {
+    setSideBar((s) => !s);
+  };
+  function openModal() {
+    setIsOpen(true);
+  }
+  function closeModal() {
+    setIsOpen(false);
+  }
+  function toggleTheme() {
+    setTheme((prev) => {
+      if (prev.isDark) {
+        localStorage.setItem(
+          "theme",
+          JSON.stringify({ ...prev, isDark: false })
+        );
+        return { ...prev, isDark: false };
+      }
+      localStorage.setItem(
+        "theme",
+        JSON.stringify({ ...prev, isDark: true })
+      );
+      return { ...prev, isDark: true };
+    });
+  }
+  return (
+    <UIContext.Provider
+      value={{
+        sideBar,
+        modalIsOpen,
+        onSideBarToggle,
+        openModal,
+        closeModal,
+        toggleTheme,
+        theme,
+      }}
+    >
+      {children}
+    </UIContext.Provider>
+  );
+};

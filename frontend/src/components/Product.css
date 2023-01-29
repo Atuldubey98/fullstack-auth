@@ -1,0 +1,26 @@
+.product {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 5px;
+  margin: auto;
+  padding: 2px;
+  max-width: 280px;
+  cursor: pointer;
+  padding: 20px;
+  border: 1px dashed black;
+}
+.description {
+  animation: 1s fadeIn;
+}
+
+.product img {
+  max-width: 250px;
+  max-height: 250px;
+  object-fit: contain;
+  margin: auto;
+}
+.product span {
+  font-weight: bolder;
+  font-size: large;
+}
