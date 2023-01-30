@@ -6,9 +6,19 @@
   margin: auto;
   padding: 2px;
   max-width: 280px;
-  cursor: pointer;
   padding: 20px;
-  border: 1px dashed black;
+}
+.product:hover .product__btns {
+  display: inline;
+}
+.product__btns {
+  position: absolute;
+  transform: translate(0%, 30%);
+  display: none;
+}
+.product__btns span {
+  background-color: grey;
+  padding: 0.3rem;
 }
 .description {
   animation: 1s fadeIn;

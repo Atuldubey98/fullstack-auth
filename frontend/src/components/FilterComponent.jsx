@@ -1,8 +1,8 @@
-import React, { useRef } from "react";
-import { useContext } from "react";
+import React, { useContext, useRef } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { ProductContext } from "../contexts/ProductsContext";
 import { ON_FILTER_CHANGE } from "../reducers/productReducer";
-import { Link, redirect, useNavigate } from "react-router-dom";
+import "./FilterComponent.css";
 const FilterComponent = ({ pages }) => {
   const options = [{ value: 5 }, { value: 10 }, { value: 15 }];
   const navigate = useNavigate();
@@ -22,19 +22,26 @@ const FilterComponent = ({ pages }) => {
   };
   return (
     <div className="filter">
-      <select name="limit" id="id" onChange={onChangeLimit}>
-        {options?.map((option) => (
-          <option {...option} key={option.value}>
-            {option.value}
-          </option>
-        ))}
-      </select>
-      <div className="filter__pages">
-        {Array.from(Array(pages).keys()).map((page) => (
-          <Link style={{ padding: 6 }} to={`/products/${page + 1}`} key={page}>
-            {page + 1}
-          </Link>
-        ))}
+      <div className="filter__limitPage">
+        <label htmlFor="limit">Products per page :</label>
+        <select name="limit" id="id" onChange={onChangeLimit}>
+          {options?.map((option) => (
+            <option {...option} key={option.value}>
+              {option.value}
+            </option>
+          ))}
+        </select>
+        <div className="filter__pages">
+          {Array.from(Array(pages).keys()).map((page) => (
+            <Link
+              style={{ padding: 6 }}
+              to={`/products/${page + 1}`}
+              key={page}
+            >
+              {page + 1}
+            </Link>
+          ))}
+        </div>
       </div>
       <form onSubmit={onSubmit}>
         <input

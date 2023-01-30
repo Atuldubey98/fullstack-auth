@@ -3,12 +3,9 @@ import Modal from "react-modal";
 import { ProductContext } from "../contexts/ProductsContext";
 import { UIContext } from "../contexts/UIContext";
 import AddProductModalForm from "./AddProductModalForm";
-const AddModal = () => {
+const AddModal = ({ children }) => {
   Modal.setAppElement("#root");
   const { modalIsOpen, closeModal } = useContext(UIContext);
-  const { state, productDispatch } = useContext(ProductContext);
-  const { categories } = state;
-  const onProductAdd = () => {};
   const customStyles = {
     content: {
       top: "50%",
@@ -41,11 +38,7 @@ const AddModal = () => {
           Close
         </button>
       </div>
-      <AddProductModalForm
-        categories={categories}
-        onProductAdd={onProductAdd}
-        state={state}
-      />
+      {children}
     </Modal>
   );
 };

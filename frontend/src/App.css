@@ -1,17 +1,17 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;600;800&display=swap");
 * {
   margin: 0;
   padding: 0;
   font-family: "Poppins", sans-serif;
 }
-:root{
-  --darkFontColor : rgb(75, 71, 71);
+:root {
+  --darkFontColor: rgb(75, 71, 71);
 }
 .dark {
   background-color: var(--darkFontColor);
   color: white;
 }
-.dark a{
+.dark a {
   color: white;
 }
 button {
@@ -23,7 +23,7 @@ button {
   cursor: pointer;
   border-radius: 5px;
 }
-button:hover{
+button:hover {
   opacity: 0.8;
 }
 .input__control {

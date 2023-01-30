@@ -1,0 +1,31 @@
+.filter {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  border-bottom: 1px solid lightgray;
+}
+
+.filter__limitPage {
+  flex: 6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 6px;
+}
+.filter__pages a {
+  padding: 5px;
+  margin: 3px;
+  color: white;
+  text-decoration: none;
+  background-color: cadetblue;
+}
+.filter__limitPage label {
+  font-weight: bold;
+  margin-right: 6px;
+}
+.filter__pages a:hover {
+  opacity: 0.8;
+}
+.filter form {
+  flex: 6;
+}

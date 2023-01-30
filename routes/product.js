@@ -1,11 +1,11 @@
 const express = require("express");
-const { auth } = require("../middlewares/auth");
+const { auth, isAdmin } = require("../middlewares/auth");
 const Product = require("../models/Product");
 const { Op } = require("sequelize");
 const Rating = require("../models/Rating");
 const productRouter = express.Router();
 
-productRouter.post("/", auth, async (req, res, next) => {
+productRouter.post("/", isAdmin, async (req, res, next) => {
   const { rating } = req.body;
   let product = null;
   try {
@@ -27,7 +27,7 @@ productRouter.post("/", auth, async (req, res, next) => {
     return res.status(400).json({ status: false, message: "error occured" });
   }
 });
-productRouter.post("/all", auth, async (req, res, next) => {
+productRouter.post("/all", isAdmin, async (req, res, next) => {
   const { products } = req.body;
   if (!products || products.length == 0 || products.length > 10) {
     return res.status(400).json({
@@ -80,7 +80,7 @@ productRouter.post("/all", auth, async (req, res, next) => {
     return res.status(400).json({ status: false, message: `Error occured` });
   }
 });
-productRouter.get("/:page", async (req, res, next) => {
+productRouter.get("/:page", auth, async (req, res, next) => {
   try {
     let { limit, search } = req.query;
     let { page } = req.params;

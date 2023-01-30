@@ -1,19 +1,20 @@
-import React from "react";
-import useQuery from "../hooks/useQuery";
-import { useContext } from "react";
-import Product from "../components/Product";
-import { useEffect } from "react";
-import Header from "../components/Header";
-import { ProductContext } from "../contexts/ProductsContext";
-import PageLayout from "./PageLayout";
+import React, { useContext, useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import ProductService from "../api/ProductService";
-import { PRODUCTS_LOADED, PRODUCTS_LOADING } from "../reducers/productReducer";
 import AddModal from "../components/AddModal";
 import FilterComponent from "../components/FilterComponent";
-import { useParams } from "react-router-dom";
-import { useState } from "react";
+import Header from "../components/Header";
+import Product from "../components/Product";
+import { ProductContext } from "../contexts/ProductsContext";
+import { PRODUCTS_LOADED, PRODUCTS_LOADING } from "../reducers/productReducer";
+import PageLayout from "./PageLayout";
+import "./AddProductsPage.css";
+import { UIContext } from "../contexts/UIContext";
+import CartProducts from "../components/CartProducts";
 const AddProductsPage = () => {
   const { state, productDispatch } = useContext(ProductContext);
+  const { sideCart } = useContext(UIContext);
+
   const { loading, error, products, filter } = state;
   const { limit, search } = filter;
   let { page } = useParams();
@@ -46,11 +47,15 @@ const AddProductsPage = () => {
       {loading ? (
         <h1>Loading...</h1>
       ) : (
-        <div className="products">
-          {products?.map((product) => (
-            <Product {...product} key={product.id} />
-          ))}
-          {products?.length === 0 && <div>{"No products found"}</div>}
+        <div className="cart__wrapper">
+          <div className="products">
+            {products?.map((product) => (
+              <Product {...product} key={product.id} />
+            ))}
+            {products?.length === 0 && <div>{"No products found"}</div>}
+          </div>
+          {sideCart && <CartProducts />}
+          
         </div>
       )}
       {error && <div>{error}</div>}

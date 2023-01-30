@@ -4,15 +4,31 @@ header {
   position: sticky;
   top: 0;
   align-items: center;
+  justify-content: space-between;
   background-color: rgb(177, 245, 177);
+}
+.header__button {
+  cursor: pointer;
+  margin-right: 30px;
+}
+.header__button span {
+  font-weight: bold;
+}
+.cart__count {
+  position: absolute;
+  font-size: small;
+  border-radius: 10px;
+  padding: 10px;
+  top: 0;
+  background-color: rgba(0, 255, 128, 0.644);
+  color: black;
+  font-weight: bold;
 }
 .header__img {
   padding-left: 30px;
-  flex: 4;
 }
 .header__buttons {
   display: flex;
-  flex: 8;
   align-items: center;
   justify-content: center;
   gap: 20px;

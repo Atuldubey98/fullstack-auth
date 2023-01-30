@@ -16,12 +16,16 @@ const User = sequelize.define(
       },
     },
     password: { type: DataTypes.STRING },
+    role: {
+      type: DataTypes.STRING,
+      defaultValue: "USER",
+    },
   },
   {
     getterMethods: {
       getJWTToken() {
         return jwt.sign(
-          { email: this.email, user: this.name },
+          { email: this.email, user: this.name, role: this.role },
           process.env.JWT_SECRET,
           {
             expiresIn: process.env.JWT_EXPIRE,

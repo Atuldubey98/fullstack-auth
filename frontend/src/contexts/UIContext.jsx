@@ -1,10 +1,22 @@
 import { createContext, useState } from "react";
-
+import { isMobile } from "react-device-detect";
 export const UIContext = createContext();
 
 export const UIContextProvider = ({ children }) => {
   const [sideBar, setSideBar] = useState(false);
   const [modalIsOpen, setIsOpen] = useState(false);
+  const [sideCart, setSideCart] = useState(false);
+  const [orderFormIndex, setOrderFormIndex] = useState(0);
+  const onOrderFormIndexChange = (index) => {
+    setOrderFormIndex(index);
+  };
+  const onSideCartToggle = () => {
+    if (isMobile) {
+      openModal();
+    } else {
+      setSideCart((p) => !p);
+    }
+  };
   const [theme, setTheme] = useState(() => {
     if (localStorage.getItem("theme")) {
       return JSON.parse(localStorage.getItem("theme"));
@@ -29,10 +41,7 @@ export const UIContextProvider = ({ children }) => {
         );
         return { ...prev, isDark: false };
       }
-      localStorage.setItem(
-        "theme",
-        JSON.stringify({ ...prev, isDark: true })
-      );
+      localStorage.setItem("theme", JSON.stringify({ ...prev, isDark: true }));
       return { ...prev, isDark: true };
     });
   }
@@ -46,6 +55,10 @@ export const UIContextProvider = ({ children }) => {
         closeModal,
         toggleTheme,
         theme,
+        sideCart,
+        onSideCartToggle,
+        orderFormIndex,
+        onOrderFormIndexChange,
       }}
     >
       {children}

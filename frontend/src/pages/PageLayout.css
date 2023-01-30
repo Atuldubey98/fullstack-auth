@@ -1,6 +1,7 @@
 .page__layout {
   display: flex;
+  min-height: 100vh;
 }
-.page__layoutBody{
-    width: 100%;
+.page__layoutBody {
+  width: 100%;
 }

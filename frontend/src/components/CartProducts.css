@@ -1,0 +1,28 @@
+.cart__products {
+  flex: 3;
+  padding-left: 1rem;
+  border-left: 3px dashed lightgray;
+}
+.cart__products:hover {
+  border-left: 3px dashed rgb(177, 245, 177);
+}
+.cart__products h2 {
+  font-weight: bold;
+}
+.cart__products img {
+  max-width: 10rem;
+  border-radius: 6px;
+  margin: auto;
+  object-fit: contain;
+}
+.cart__null{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cart__zero span {
+  position: absolute;
+  transform: translate(2rem, 8rem);
+  font-weight: bold;
+}

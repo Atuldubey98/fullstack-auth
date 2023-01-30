@@ -24,8 +24,7 @@ const SideBar = () => {
     <div style={{ display: sideBar ? "inline" : "none" }} className="sidebar">
       <div className="sidebar__head"></div>
       <div className="sidebar__links">
-        <Link to={"/"}>Home</Link>
-        <Link to={"/"}>Users</Link>
+        <Link to={"/"}>Landing</Link>
         <Link to={"/products"}>Products</Link>
         <Button {...logout} />
         <Button {...addProduct} />

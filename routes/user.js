@@ -1,6 +1,8 @@
 const express = require("express");
 const bcryptjs = require("bcryptjs");
 const User = require("../models/User");
+const Address = require("../models/Address");
+
 const { auth } = require("../middlewares/auth");
 const userRouter = express.Router();
 
@@ -32,6 +34,7 @@ userRouter.post("/login", async (req, res, next) => {
 
 userRouter.post("/register", async (req, res, next) => {
   const { name, email, password } = req.body;
+  let { role } = req.body;
   try {
     if (
       email.length <= 3 ||
@@ -42,11 +45,20 @@ userRouter.post("/register", async (req, res, next) => {
         .status(403)
         .json({ status: false, message: "user already exists" });
     }
-    await User.create({
-      email,
-      password: bcryptjs.hashSync(password, bcryptjs.genSaltSync(10)),
-      name,
-    });
+    if (role === "ADMIN") {
+      await User.create({
+        email,
+        password: bcryptjs.hashSync(password, bcryptjs.genSaltSync(10)),
+        name,
+        role,
+      });
+    } else {
+      await User.create({
+        email,
+        password: bcryptjs.hashSync(password, bcryptjs.genSaltSync(10)),
+        name,
+      });
+    }
     return res
       .status(200)
       .json({ status: true, message: "User created with id " + email });
@@ -81,6 +93,31 @@ userRouter.get("/all", auth, async (req, res, next) => {
     const users = await User.findAll({ attributes: ["email", "name"] });
     return res.status(200).json({ status: true, users });
   } catch (error) {
+    return res.status(400).json({ status: false, message: `Error occured` });
+  }
+});
+
+userRouter.post("/address", auth, async (req, res, next) => {
+  const userEmail = req.user.email;
+  try {
+    const address = await Address.create({ ...req.body, userEmail });
+    return res
+      .status(200)
+      .json({ status: true, message: `Address added !`, address });
+  } catch (error) {
+    return res.status(400).json({ status: false, message: `Error occured` });
+  }
+});
+userRouter.get("/address/all", auth, async (req, res) => {
+  try {
+    const addresses = await Address.findAll({
+      where: {
+        userEmail: req.user.email,
+      },
+    });
+    return res.status(200).json({ status: true, addresses });
+  } catch (error) {
+    console.log(error);
     return res.status(400).json({ status: false, message: `Error occured` });
   }
 });

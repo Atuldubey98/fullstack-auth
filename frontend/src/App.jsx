@@ -8,6 +8,7 @@ import AddProductsPage from "./pages/AddProductsPage";
 import { LandingPage } from "./pages/LandingPage";
 import RegisterPage from "./pages/RegisterPage";
 import LoginPage from "./pages/LoginPage";
+import PlaceOrder from "./pages/PlaceOrder";
 
 const App = () => {
   const { theme } = useContext(UIContext);
@@ -42,6 +43,7 @@ const App = () => {
             }
           />
         </Route>
+        <Route path="/placeorder" element={<PlaceOrder />} />
       </Routes>
     </div>
   );

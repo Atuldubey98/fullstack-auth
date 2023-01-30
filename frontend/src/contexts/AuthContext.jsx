@@ -30,7 +30,6 @@ export const AuthContextProvider = ({ children }) => {
         email,
         password,
       });
-      console.log(response);
       setUser(jwt_decode(response.data.token));
       localStorage.setItem("token", JSON.stringify(response.data.token));
       navigate("/", { replace: true });
