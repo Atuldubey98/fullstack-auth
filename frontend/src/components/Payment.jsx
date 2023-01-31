@@ -28,7 +28,6 @@ function Payment() {
       orderDispatch({ type: CLIENT_SECRET_ERROR, payload: "Payment Error" });
     }
   }, []);
-  console.log(clientSecret);
   return (
     <div className="payment__wrapper">
       <h1>Payment</h1>
