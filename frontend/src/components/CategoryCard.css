@@ -1,0 +1,27 @@
+.category__card {
+  flex: 1;
+  min-width: 18rem;
+  border: 3px double rgb(113, 252, 113);
+  border-radius: 10px;
+  box-sizing: border-box;
+  padding: 1rem;
+  margin: 1rem;
+  box-shadow: -3px -6px 17px 2px rgb(177, 245, 177);
+}
+.category__cardImg img {
+  width: 8rem;
+  margin: auto;
+  display: flex;
+  align-items: center;
+}
+.category__card h5 {
+  text-align: center;
+}
+.category__card h5 {
+  font-weight: bold;
+  font-size: large;
+}
+
+.category__card p {
+  text-align: justify;
+}

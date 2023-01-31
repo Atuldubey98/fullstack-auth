@@ -11,11 +11,7 @@ export const UIContextProvider = ({ children }) => {
     setOrderFormIndex(index);
   };
   const onSideCartToggle = () => {
-    if (isMobile) {
-      openModal();
-    } else {
-      setSideCart((p) => !p);
-    }
+    setSideCart((p) => !p);
   };
   const [theme, setTheme] = useState(() => {
     if (localStorage.getItem("theme")) {

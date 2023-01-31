@@ -9,6 +9,7 @@ import { LandingPage } from "./pages/LandingPage";
 import RegisterPage from "./pages/RegisterPage";
 import LoginPage from "./pages/LoginPage";
 import PlaceOrder from "./pages/PlaceOrder";
+import Completion from "./pages/Completion";
 
 const App = () => {
   const { theme } = useContext(UIContext);
@@ -43,7 +44,22 @@ const App = () => {
             }
           />
         </Route>
-        <Route path="/placeorder" element={<PlaceOrder />} />
+        <Route
+          path="/placeorder"
+          element={
+            <PrivateRoute>
+              <PlaceOrder />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/completion"
+          element={
+            <PrivateRoute>
+              <Completion />
+            </PrivateRoute>
+          }
+        />
       </Routes>
     </div>
   );

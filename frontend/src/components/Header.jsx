@@ -33,7 +33,11 @@ const Header = () => {
             Products
           </div>
         </Link>
-        <div onClick={onSideCartToggle} className="header__button">
+        <div
+          style={{ color: "black" }}
+          onClick={onSideCartToggle}
+          className="header__button"
+        >
           <FontAwesomeIcon icon={faCartShopping} />
           <span>Cart</span>
           <span className="cart__count">{cartProducts.length}</span>

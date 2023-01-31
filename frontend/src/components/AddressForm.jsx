@@ -2,12 +2,13 @@ import React, { useContext, useEffect } from "react";
 import OrderService from "../api/OrderService";
 import { CartContext } from "../contexts/CartContext";
 import { OrderContext } from "../contexts/OrderContext";
+import { UIContext } from "../contexts/UIContext";
 import {
   ADDRESS_ADD,
   ADDRESS_ERROR,
   ADDRESS_LOADED,
   ADDRESS_LOADING,
-  ON_ADDRESS_CHANGE
+  ON_ADDRESS_CHANGE,
 } from "../reducers/orderReducer";
 import Address from "./Address";
 import "./AddressForm.css";
@@ -15,6 +16,7 @@ import ErrorMessage from "./ErrorMessage";
 import Loading from "./Loading";
 const AddressForm = () => {
   const { state, orderDispatch } = useContext(OrderContext);
+  const { onOrderFormIndexChange } = useContext(UIContext);
   const { state: cartState } = useContext(CartContext);
 
   const { addresses, loading, error } = state;
@@ -46,6 +48,7 @@ const AddressForm = () => {
       }, 2000);
       return;
     }
+    onOrderFormIndexChange(1);
   };
   useEffect(() => {
     orderDispatch({ type: ADDRESS_LOADING });

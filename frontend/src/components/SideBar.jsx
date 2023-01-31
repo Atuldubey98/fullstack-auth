@@ -4,7 +4,7 @@ import { UIContext } from "../contexts/UIContext";
 import Button from "./Button";
 import "./SideBar.css";
 const SideBar = () => {
-  const { sideBar, openModal } = useContext(UIContext);
+  const { sideBar } = useContext(UIContext);
   const logout = {
     text: "Logout",
     style: {
@@ -12,22 +12,15 @@ const SideBar = () => {
       color: "white",
     },
   };
-  const addProduct = {
-    text: "Add Product",
-    onClick: openModal,
-    style: {
-      backgroundColor: "green",
-      color: "white",
-    },
-  };
+
   return (
     <div style={{ display: sideBar ? "inline" : "none" }} className="sidebar">
       <div className="sidebar__head"></div>
       <div className="sidebar__links">
         <Link to={"/"}>Landing</Link>
         <Link to={"/products"}>Products</Link>
+        <Link to={"/placeorder"}>Place Order</Link>
         <Button {...logout} />
-        <Button {...addProduct} />
       </div>
     </div>
   );

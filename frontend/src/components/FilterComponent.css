@@ -28,4 +28,19 @@
 }
 .filter form {
   flex: 6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.filter form button {
+  background-color: rgb(84, 84, 221, 0.986);
+  color: white;
+  font-weight: 600;
+}
+.filter form input {
+  outline: none;
+  border: none;
+}
+.filter form .input {
+  border: 1px solid lightgray;
 }

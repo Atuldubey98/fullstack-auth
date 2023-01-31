@@ -17,5 +17,21 @@ class OrderService {
       throw error;
     }
   }
+  static async getPublishableKey() {
+    try {
+      const { data } = await instance.get("/config");
+      return data;
+    } catch (error) {
+      throw error;
+    }
+  }
+  static async getPaymentIntent() {
+    try {
+      const { data } = await instance.get("/create-payment-intent");
+      return data;
+    } catch (error) {
+      throw error;
+    }
+  }
 }
 export default OrderService;

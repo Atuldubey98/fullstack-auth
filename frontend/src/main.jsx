@@ -15,9 +15,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         <UIContextProvider>
           <AuthContextProvider>
             <ProductContextProivder>
-              <React.StrictMode>
-                <App />
-              </React.StrictMode>
+              <App />
             </ProductContextProivder>
           </AuthContextProvider>
         </UIContextProvider>

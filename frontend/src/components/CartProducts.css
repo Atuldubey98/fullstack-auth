@@ -15,7 +15,7 @@
   margin: auto;
   object-fit: contain;
 }
-.cart__null{
+.cart__null {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -25,4 +25,17 @@
   position: absolute;
   transform: translate(2rem, 8rem);
   font-weight: bold;
+}
+.cart__total span {
+  font-weight: bold;
+}
+
+@media screen and (max-width: 600px) {
+  .cart__products {
+    position: absolute;
+    width: 95%;
+    background-color: white;
+    z-index: 1;
+    border-left: 3px dashed none;
+  }
 }

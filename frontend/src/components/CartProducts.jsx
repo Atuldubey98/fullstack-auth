@@ -1,10 +1,9 @@
 import React, { useContext } from "react";
+import { useNavigate } from "react-router-dom";
+import store from "../assets/store.jpg";
 import { CartContext } from "../contexts/CartContext";
 import CartProduct from "./CartProduct";
-import store from "../assets/store.jpg";
 import "./CartProducts.css";
-import { useMemo } from "react";
-import { useNavigate } from "react-router-dom";
 const CartProducts = () => {
   const { state } = useContext(CartContext);
   const { cartProducts } = state;
@@ -26,7 +25,13 @@ const CartProducts = () => {
         {cartProducts.length <= 0 && (
           <div className="cart__null">
             <div className="cart__zero">
-              <span>Cart Empty</span>
+              <span
+                style={{
+                  color: "black",
+                }}
+              >
+                Cart Empty
+              </span>
               <img src={store} alt="noproducts" className="noprod" />
             </div>
           </div>
@@ -34,7 +39,7 @@ const CartProducts = () => {
       </div>
       {totalPrice !== 0 && (
         <div className="cart__total">
-          <span>{`Rs ${totalPrice}`}</span>
+          <span>{`Rs ${totalPrice.toFixed(2)}`}</span>
           <button onClick={() => navigate("/placeorder")}>Place Order</button>
         </div>
       )}

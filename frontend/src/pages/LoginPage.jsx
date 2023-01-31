@@ -18,7 +18,6 @@ const LoginPage = () => {
       console.log(error);
     }
   }
-  console.log(userLoading);
   return (
     <div className="login__page">
       <form onSubmit={onSubmit}>

@@ -8,6 +8,7 @@
   max-width: 280px;
   padding: 20px;
 }
+
 .product:hover .product__btns {
   display: inline;
 }

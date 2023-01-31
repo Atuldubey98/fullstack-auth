@@ -1,0 +1,12 @@
+.category__cards {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 1rem;
+  align-self: center;
+}
+
+.category__cardsWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

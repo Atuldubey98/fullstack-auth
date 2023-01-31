@@ -40,7 +40,10 @@ const Product = memo((product) => {
   };
   return (
     <div className="product">
-      <div className="product__btns">
+      <div
+        style={{ display: cartProd.quantity > 0 && "inline" }}
+        className="product__btns"
+      >
         <button onClick={addToBasket}>
           <FontAwesomeIcon icon={faPlus} />
         </button>

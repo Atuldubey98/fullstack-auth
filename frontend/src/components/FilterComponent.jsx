@@ -1,5 +1,7 @@
+import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useContext, useRef } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { ProductContext } from "../contexts/ProductsContext";
 import { ON_FILTER_CHANGE } from "../reducers/productReducer";
 import "./FilterComponent.css";
@@ -7,6 +9,8 @@ const FilterComponent = ({ pages }) => {
   const options = [{ value: 5 }, { value: 10 }, { value: 15 }];
   const navigate = useNavigate();
   const searchRef = useRef();
+  let { page } = useParams();
+  page = typeof page === "string" ? parseInt(page) : 1;
   const { productDispatch, state } = useContext(ProductContext);
   const onChangeLimit = (e) => {
     const { name, value } = e.target;
@@ -20,6 +24,7 @@ const FilterComponent = ({ pages }) => {
     productDispatch({ type: ON_FILTER_CHANGE, payload: { name, value } });
     navigate("/products/1");
   };
+
   return (
     <div className="filter">
       <div className="filter__limitPage">
@@ -32,25 +37,32 @@ const FilterComponent = ({ pages }) => {
           ))}
         </select>
         <div className="filter__pages">
-          {Array.from(Array(pages).keys()).map((page) => (
+          {Array.from(Array(pages).keys()).map((p) => (
             <Link
-              style={{ padding: 6 }}
-              to={`/products/${page + 1}`}
-              key={page}
+              style={{
+                padding: 6,
+                backgroundColor: p === page - 1 && "#5d7272",
+              }}
+              to={`/products/${p + 1}`}
+              key={p}
             >
-              {page + 1}
+              {p + 1}
             </Link>
           ))}
         </div>
       </div>
       <form onSubmit={onSubmit}>
-        <input
-          type="text"
-          defaultValue={state.filter.search}
-          name="search"
-          ref={searchRef}
-        />
-        <button type="submit">Search</button>
+        <div className="input">
+          <input
+            type="text"
+            defaultValue={state.filter.search}
+            name="search"
+            ref={searchRef}
+          />
+        </div>
+        <button type="submit">
+          <FontAwesomeIcon icon={faMagnifyingGlass} />
+        </button>
       </form>
     </div>
   );

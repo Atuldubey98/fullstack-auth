@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import ProductService from "../api/ProductService";
-import AddModal from "../components/AddModal";
 import FilterComponent from "../components/FilterComponent";
 import Header from "../components/Header";
 import Product from "../components/Product";
@@ -11,6 +10,7 @@ import PageLayout from "./PageLayout";
 import "./AddProductsPage.css";
 import { UIContext } from "../contexts/UIContext";
 import CartProducts from "../components/CartProducts";
+import Loading from "../components/Loading";
 const AddProductsPage = () => {
   const { state, productDispatch } = useContext(ProductContext);
   const { sideCart } = useContext(UIContext);
@@ -44,22 +44,22 @@ const AddProductsPage = () => {
     <PageLayout>
       <Header />
       <FilterComponent pages={pages} />
-      {loading ? (
-        <h1>Loading...</h1>
-      ) : (
-        <div className="cart__wrapper">
+
+      <div className="cart__wrapper">
+        {loading ? (
+          <Loading />
+        ) : (
           <div className="products">
             {products?.map((product) => (
               <Product {...product} key={product.id} />
             ))}
             {products?.length === 0 && <div>{"No products found"}</div>}
           </div>
-          {sideCart && <CartProducts />}
-          
-        </div>
-      )}
+        )}
+        {sideCart && <CartProducts />}
+      </div>
+
       {error && <div>{error}</div>}
-      <AddModal />
     </PageLayout>
   );
 };
