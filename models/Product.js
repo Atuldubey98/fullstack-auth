@@ -29,6 +29,14 @@ const Product = sequelize.define("products", {
       isUrl: true,
     },
   },
+  stock: {
+    type: DataTypes.INTEGER,
+    defaultValue: 0,
+    validate: {
+      isInt: true,
+      min: 0,
+    },
+  },
 });
 Rating.hasOne(Product);
 Product.belongsTo(Rating);
