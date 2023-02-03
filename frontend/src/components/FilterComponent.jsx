@@ -5,12 +5,12 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import { ProductContext } from "../contexts/ProductsContext";
 import { ON_FILTER_CHANGE } from "../reducers/productReducer";
 import "./FilterComponent.css";
+import FilterPages from "./FilterPages";
 const FilterComponent = ({ pages }) => {
   const options = [{ value: 5 }, { value: 10 }, { value: 15 }];
   const navigate = useNavigate();
   const searchRef = useRef();
-  let { page } = useParams();
-  page = typeof page === "string" ? parseInt(page) : 1;
+
   const { productDispatch, state } = useContext(ProductContext);
   const onChangeLimit = (e) => {
     const { name, value } = e.target;
@@ -36,20 +36,7 @@ const FilterComponent = ({ pages }) => {
             </option>
           ))}
         </select>
-        <div className="filter__pages">
-          {Array.from(Array(pages).keys()).map((p) => (
-            <Link
-              style={{
-                padding: 6,
-                backgroundColor: p === page - 1 && "#5d7272",
-              }}
-              to={`/products/${p + 1}`}
-              key={p}
-            >
-              {p + 1}
-            </Link>
-          ))}
-        </div>
+        <FilterPages pages={pages} />
       </div>
       <form onSubmit={onSubmit}>
         <div className="input">
