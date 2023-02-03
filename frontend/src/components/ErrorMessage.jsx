@@ -1,9 +1,11 @@
 import React from "react";
-import './ErrorMessage.css'
-const ErrorMessage = ({ error }) => {
+import "./ErrorMessage.css";
+const ErrorMessage = (error) => {
+  const { message, backgroundColor } = error;
+  console.log(error);
   return (
     <div className="error">
-      <span>{error}</span>
+      <span style={{ backgroundColor }}>{message}</span>
     </div>
   );
 };

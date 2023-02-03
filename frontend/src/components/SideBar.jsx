@@ -1,12 +1,25 @@
 import React, { memo, useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { UIContext } from "../contexts/UIContext";
 import Button from "./Button";
+import UserService from "../api/UserService";
 import "./SideBar.css";
 const SideBar = () => {
   const { sideBar } = useContext(UIContext);
+  const navigate = useNavigate();
   const logout = {
     text: "Logout",
+    onClick: async function () {
+      try {
+        const { status } = await UserService.logout();
+        if (status) {
+          localStorage.clear();
+          navigate("/login", { replace: true });
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    },
     style: {
       backgroundColor: "black",
       color: "white",

@@ -30,20 +30,17 @@ userRouter.post("/login", async (req, res, next) => {
     console.log(error);
     return res.status(400).json({ status: false, message: "Error occured" });
   }
+
 });
 
 userRouter.post("/register", async (req, res, next) => {
   const { name, email, password } = req.body;
   let { role } = req.body;
   try {
-    if (
-      email.length <= 3 ||
-      password.length <= 5 ||
-      (await User.findByPk(email))
-    ) {
+    if (await User.findByPk(email)) {
       return res
         .status(403)
-        .json({ status: false, message: "user already exists" });
+        .json({ status: false, message: "User already exists" });
     }
     if (role === "ADMIN") {
       await User.create({
@@ -121,5 +118,7 @@ userRouter.get("/address/all", auth, async (req, res) => {
     return res.status(400).json({ status: false, message: `Error occured` });
   }
 });
-
+userRouter.get("/logout", auth, (req, res, next) => {
+  return res.status(200).json({ status: true, message: "User logged out !" });
+});
 module.exports = userRouter;

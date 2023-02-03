@@ -3,6 +3,7 @@ import OrderService from "../api/OrderService";
 import { CartContext } from "../contexts/CartContext";
 import { OrderContext } from "../contexts/OrderContext";
 import { UIContext } from "../contexts/UIContext";
+import useMessage from "../hooks/useMessage";
 import {
   ADDRESS_ADD,
   ADDRESS_ERROR,
@@ -20,13 +21,17 @@ const AddressForm = () => {
   const { state: cartState } = useContext(CartContext);
 
   const { addresses, loading, error } = state;
+  const [message, onMessageSet] = useMessage();
   const addAddress = async (e) => {
     try {
       e.preventDefault();
       const { address } = await OrderService.addAddressAPI(state.address);
       orderDispatch({ type: ADDRESS_ADD, payload: address });
+      const data = { message: "New address added !" };
+      onMessageSet(data);
     } catch (error) {
-      console.log(error);
+      const data = { message: "Error occured !", isError: true };
+      onMessageSet(data);
     }
   };
   const onAddressChange = (e) => {
@@ -61,6 +66,7 @@ const AddressForm = () => {
       }
     })();
   }, []);
+
   return (
     <div className="address__form">
       <div className="addresses">
@@ -70,16 +76,18 @@ const AddressForm = () => {
             <Loading />
           ) : (
             <div className="address__list">
-              {addresses.map((address) => (
-                <Address {...address} key={address.id} />
-              ))}
+              {addresses.length === 0
+                ? null
+                : addresses.map((address) => (
+                    <Address {...address} key={address.id} />
+                  ))}
             </div>
           )}
           <button type="submit" disabled={state.selectedAddress === 0}>
             {state.selectedAddress === 0 ? "Select Address" : "Submit"}
           </button>
         </form>
-        {error && <ErrorMessage error={error} />}
+        {message.message && <ErrorMessage {...message} />}
       </div>
       <form onSubmit={addAddress}>
         <div className="input__control">

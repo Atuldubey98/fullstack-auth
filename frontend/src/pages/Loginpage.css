@@ -1,6 +1,27 @@
-.login__page{
-    height: 100vh;
-    display: flex;
-    align-content: center;
-    flex-direction: column;
+.login__page {
+  height: 100vh;
+  display: grid;
+  background: rgb(63, 94, 251);
+  background: radial-gradient(
+    circle,
+    rgba(63, 94, 251, 1) 0%,
+    rgba(252, 70, 107, 1) 100%
+  );
+}
+.login__page form {
+  display: grid;
+  max-width: 60rem;
+  margin: auto;
+}
+.login__page form button {
+  width: 60%;
+  margin: auto;
+  font-weight: 600;
+  background-color: #5dbea3;
+}
+.login__page form a {
+  text-align: center;
+  color: white;
+  padding-top: 1rem;
+  font-weight: bold;
 }

@@ -27,19 +27,15 @@ button:hover {
   opacity: 0.8;
 }
 .input__control {
-  display: flex;
+  display: grid;
   gap: 5px;
   margin-bottom: 10px;
   flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
 }
 .input__control input {
-  flex: 9;
   padding: 2px;
 }
 .input__control label {
-  flex: 3;
   font-weight: bolder;
 }
 input {

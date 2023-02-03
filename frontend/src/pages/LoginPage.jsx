@@ -1,6 +1,7 @@
 import React from "react";
 import { useContext } from "react";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { AuthContext } from "../contexts/AuthContext";
 import "./Loginpage.css";
 const LoginPage = () => {
@@ -14,7 +15,7 @@ const LoginPage = () => {
     e.preventDefault();
     try {
       await login(user.email, user.password);
-    } catch (e) {
+    } catch (error) {
       console.log(error);
     }
   }
@@ -23,13 +24,28 @@ const LoginPage = () => {
       <form onSubmit={onSubmit}>
         <div className="input__control">
           <label htmlFor="email">Email : </label>
-          <input onChange={onChange} type="email" name="email" />
+          <input
+            onChange={onChange}
+            type="email"
+            name="email"
+            value={user.email}
+            autoComplete="off"
+            placeholder={user.email.length === 0 ? "Email address" : ""}
+          />
         </div>
         <div className="input__control">
           <label htmlFor="password">Password : </label>
-          <input onChange={onChange} type="password" name="password" />
+          <input
+            onChange={onChange}
+            type="password"
+            name="password"
+            value={user.password}
+            autoComplete="off"
+            placeholder={user.password.length === 0 ? "Password" : ""}
+          />
         </div>
         {!userLoading && <button type="submit">Login</button>}
+        <Link to={"/register"}>Register Instead ?</Link>
       </form>
     </div>
   );

@@ -16,6 +16,14 @@ class UserService {
       throw error;
     }
   }
+  static async logout() {
+    try {
+      const { data } = await instance.get("/user/logout");
+      return data;
+    } catch (error) {
+      throw error;
+    }
+  }
 }
 
 export default UserService;
