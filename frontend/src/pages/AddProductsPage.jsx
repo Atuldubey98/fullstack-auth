@@ -45,19 +45,20 @@ const AddProductsPage = () => {
       <Header />
       <FilterComponent pages={pages} />
 
-      <div className="cart__wrapper">
-        {loading ? (
-          <Loading />
-        ) : (
+      {loading ? (
+        <Loading />
+      ) : (
+        <div className="cart__wrapper">
           <div className="products">
             {products?.map((product) => (
               <Product {...product} key={product.id} />
             ))}
             {products?.length === 0 && <div>{"No products found"}</div>}
           </div>
-        )}
-        {sideCart && <CartProducts />}
-      </div>
+
+          {sideCart && <CartProducts />}
+        </div>
+      )}
 
       {error && <div>{error}</div>}
     </PageLayout>

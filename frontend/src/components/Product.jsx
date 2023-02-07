@@ -1,4 +1,4 @@
-import { faMinus, faPlus } from "@fortawesome/free-solid-svg-icons";
+import { faMinus, faPlus, faStar } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { memo, useContext } from "react";
 import { CartContext } from "../contexts/CartContext";
@@ -6,9 +6,14 @@ import { CART_ADD, CART_REMOVE } from "../reducers/cartReducer";
 import "./Product.css";
 const Product = memo((product) => {
   const { category, createdAt, id, price, title, image } = product;
+  let { rating } = product;
+  if (!rating || !("rate" in rating)) {
+    rating = { rate: 0 };
+  }
   const { state, cartDispatch } = useContext(CartContext);
   const { cartProducts } = state;
   const cartProds = cartProducts.filter((product) => product.id === id);
+
   const cartProd = cartProds.length > 0 ? cartProds[0] : { quantity: 0 };
   const getDate = (date) => {
     const yyyy = date.getFullYear();
@@ -38,6 +43,13 @@ const Product = memo((product) => {
   const removeFromBasket = () => {
     cartDispatch({ type: CART_REMOVE, payload: { ...product } });
   };
+  const Stars = () => {
+    let { rate } = rating;
+    rate = parseInt(rate);
+    return Array.from(Array(rate)).map((r) => (
+      <FontAwesomeIcon icon={faStar} style={{ color: "gold" }} />
+    ));
+  };
   return (
     <div className="product">
       <div
@@ -57,8 +69,11 @@ const Product = memo((product) => {
         <h3>{title}</h3>
         <p>{category}</p>
         <h5>{getDate(new Date(createdAt))}</h5>
+        <span>{`Rs ${price}`}</span>
       </div>
-      <span>{`Rs ${price}`}</span>
+      <div className="product__ratings">
+        <Stars />
+      </div>
     </div>
   );
 });

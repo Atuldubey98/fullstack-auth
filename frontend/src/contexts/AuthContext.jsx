@@ -34,8 +34,7 @@ export const AuthContextProvider = ({ children }) => {
       localStorage.setItem("token", JSON.stringify(response.data.token));
       navigate("/", { replace: true });
     } catch (error) {
-      console.log(error);
-      setError(error.response.data.message);
+      setError(error.response?.data?.message);
       setTimeout(() => {
         setError(null);
       }, 2000);

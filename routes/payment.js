@@ -1,12 +1,13 @@
-const express= require("express");
+const express = require("express");
+const { auth } = require("../middlewares/auth");
 const stripe = require("../stripeConnect");
 const paymentRouter = express.Router();
-paymentRouter.get("/config", (req, res) => {
+paymentRouter.get("/config", auth, (req, res) => {
   return res.send({
     publishableKey: process.env.STRIPE_PUBLISHABLE_KEY,
   });
 });
-paymentRouter.get("/create-payment-intent", async (req, res, next) => {
+paymentRouter.get("/create-payment-intent", auth, async (req, res, next) => {
   try {
     const paymentIntent = await stripe.paymentIntents.create({
       currency: "INR",
@@ -28,6 +29,7 @@ paymentRouter.get("/create-payment-intent", async (req, res, next) => {
 });
 paymentRouter.post(
   "/webhook",
+  auth,
   express.raw({ type: "application/json" }),
   (request, response) => {
     const sig = request.headers["stripe-signature"];

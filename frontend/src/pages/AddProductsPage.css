@@ -4,6 +4,8 @@
   gap: 20px;
   padding: 1.5rem;
   flex: 9;
+  max-width: 80%;
+  margin: auto;
 }
 .cart__wrapper {
   display: flex;

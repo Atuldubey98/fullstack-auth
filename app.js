@@ -7,6 +7,7 @@ const app = express();
 const userRouter = require("./routes/user");
 const productRouter = require("./routes/product");
 const categoryRouter = require("./routes/category");
+const paymentRouter = require("./routes/payment");
 const PORT = process.env.PORT | 3000;
 app.use(cors());
 app.use(bodyParser.json());
@@ -14,7 +15,6 @@ app.use("/user", userRouter);
 app.use("/product", productRouter);
 app.use("/category", categoryRouter);
 
-const paymentRouter = require("./routes/payment");
 app.use(paymentRouter);
 
 app.use("*", (req, res, next) => {

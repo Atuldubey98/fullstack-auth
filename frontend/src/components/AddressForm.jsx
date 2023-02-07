@@ -41,16 +41,8 @@ const AddressForm = () => {
   const onAddressSubmit = (e) => {
     e.preventDefault();
     if (cartState.cartProducts.length <= 0) {
-      orderDispatch({
-        type: ADDRESS_ERROR,
-        payload: `Put some items in basket`,
-      });
-      setTimeout(() => {
-        orderDispatch({
-          type: ADDRESS_ERROR,
-          payload: ``,
-        });
-      }, 2000);
+      const data = { message: "Add items in basket !", isError: true };
+      onMessageSet(data);
       return;
     }
     onOrderFormIndexChange(1);
