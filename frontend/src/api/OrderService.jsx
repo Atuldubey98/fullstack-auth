@@ -25,9 +25,14 @@ class OrderService {
       throw error;
     }
   }
-  static async getPaymentIntent() {
+  static async getPaymentIntent(cartProducts) {
     try {
-      const { data } = await instance.get("/create-payment-intent");
+      if (cartProducts.length === 0) {
+        throw new Error("Please add items in basket");
+      }
+      const { data } = await instance.post("/create-payment-intent", {
+        products: cartProducts,
+      });
       return data;
     } catch (error) {
       throw error;

@@ -1,13 +1,14 @@
 .address__form {
   padding: 20px;
- 
-  width: 70%;
   margin: auto;
 }
 .address__list {
   max-height: 20rem;
-  
   overflow-y: scroll;
+  display: grid;
+}
+.address__list button{
+  width: 60%;
 }
 .address__list::-webkit-scrollbar {
   display: none;
@@ -20,6 +21,7 @@
 }
 .address__form form label {
   font-weight: bold;
+  font-size: 1.1rem;
 }
 .address__form form button {
   width: 60%;

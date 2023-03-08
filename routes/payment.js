@@ -7,12 +7,20 @@ paymentRouter.get("/config", auth, (req, res) => {
     publishableKey: process.env.STRIPE_PUBLISHABLE_KEY,
   });
 });
-paymentRouter.get("/create-payment-intent", auth, async (req, res, next) => {
+paymentRouter.post("/create-payment-intent", auth, async (req, res, next) => {
   try {
+    const { products } = await req.body;
+    if (!products || products.length === 0) {
+      return res.status(400).json({ status: false });
+    }
+    const amount = products.reduce(
+      (sum, { price, quantity }) => sum + price * quantity,
+      0
+    );
     const paymentIntent = await stripe.paymentIntents.create({
       currency: "INR",
-      amount: 1999,
-      automatic_payment_methods: { enabled: true },
+      amount: parseInt(amount),
+      automatic_payment_methods: { enabled: true  },
     });
 
     // Send publishable key and PaymentIntent details to client

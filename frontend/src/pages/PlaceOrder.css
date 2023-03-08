@@ -1,3 +1,10 @@
-.order__form {
-  flex: 9;
+.place__order {
+  width: 70%;
+  margin: auto;
+  min-height: 100vh;
+}
+@media screen and (max-width: 750px) {
+  .place__order {
+    width: 100%;
+  }
 }

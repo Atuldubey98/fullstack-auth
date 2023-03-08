@@ -30,7 +30,7 @@
   font-weight: bold;
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 750px) {
   .cart__products {
     position: absolute;
     width: 95%;

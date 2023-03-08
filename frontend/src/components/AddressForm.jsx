@@ -20,7 +20,7 @@ const AddressForm = () => {
   const { onOrderFormIndexChange } = useContext(UIContext);
   const { state: cartState } = useContext(CartContext);
 
-  const { addresses, loading, error } = state;
+  const { addresses, loading } = state;
   const [message, onMessageSet] = useMessage();
   const addAddress = async (e) => {
     try {
@@ -63,21 +63,19 @@ const AddressForm = () => {
     <div className="address__form">
       <div className="addresses">
         <form onSubmit={onAddressSubmit}>
-          <label htmlFor="current">Select Address to Deliver :</label>
+          <h3 htmlFor="current">Select Address to Deliver :</h3>
           {loading ? (
             <Loading />
-          ) : (
+          ) : addresses.length === 0 ? null : (
             <div className="address__list">
-              {addresses.length === 0
-                ? null
-                : addresses.map((address) => (
-                    <Address {...address} key={address.id} />
-                  ))}
+              {addresses.map((address) => (
+                <Address {...address} key={address.id} />
+              ))}
+              <button type="submit" disabled={state.selectedAddress === 0}>
+                {state.selectedAddress === 0 ? "Select Address" : "Submit"}
+              </button>
             </div>
           )}
-          <button type="submit" disabled={state.selectedAddress === 0}>
-            {state.selectedAddress === 0 ? "Select Address" : "Submit"}
-          </button>
         </form>
         {message.message && <ErrorMessage {...message} />}
       </div>

@@ -10,6 +10,7 @@ import RegisterPage from "./pages/RegisterPage";
 import LoginPage from "./pages/LoginPage";
 import PlaceOrder from "./pages/PlaceOrder";
 import Completion from "./pages/Completion";
+import { ToastContainer } from "react-toastify";
 
 const App = () => {
   const { theme } = useContext(UIContext);

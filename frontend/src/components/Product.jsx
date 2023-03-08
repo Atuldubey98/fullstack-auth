@@ -46,8 +46,8 @@ const Product = memo((product) => {
   const Stars = () => {
     let { rate } = rating;
     rate = parseInt(rate);
-    return Array.from(Array(rate)).map((r) => (
-      <FontAwesomeIcon icon={faStar} style={{ color: "gold" }} />
+    return Array.from(Array(rate)).map((r, index) => (
+      <FontAwesomeIcon icon={faStar} style={{ color: "gold" }} key={index} />
     ));
   };
   return (

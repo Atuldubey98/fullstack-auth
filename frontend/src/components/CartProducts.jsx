@@ -4,14 +4,24 @@ import store from "../assets/store.jpg";
 import { CartContext } from "../contexts/CartContext";
 import CartProduct from "./CartProduct";
 import "./CartProducts.css";
+import useMessage from "../hooks/useMessage";
+import ErrorMessage from "./ErrorMessage";
 const CartProducts = () => {
   const { state } = useContext(CartContext);
   const { cartProducts } = state;
+  const [message, onMessageSet] = useMessage();
   const totalPrice = cartProducts.reduce(
     (sum, value) => sum + value.price * value.quantity,
     0
   );
   const navigate = useNavigate();
+  const onNavigateToPlaceOrder = () => {
+    if (totalPrice < 100) {
+      onMessageSet({ message: "Add price greater than 100", isError: true });
+    } else {
+      navigate("/placeorder");
+    }
+  };
   return (
     <div className="cart__products">
       <h2>
@@ -40,9 +50,10 @@ const CartProducts = () => {
       {totalPrice !== 0 && (
         <div className="cart__total">
           <span>{`Rs ${totalPrice.toFixed(2)}`}</span>
-          <button onClick={() => navigate("/placeorder")}>Place Order</button>
+          <button onClick={onNavigateToPlaceOrder}>Place Order</button>
         </div>
       )}
+      {message.message.length > 0 && <ErrorMessage {...message} />}
     </div>
   );
 };

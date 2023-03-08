@@ -14,11 +14,13 @@ import {
 } from "../reducers/orderReducer";
 import CheckoutForm from "./CheckoutForm";
 import { loadStripe } from "@stripe/stripe-js";
+import { CartContext } from "../contexts/CartContext";
 function Payment() {
   const { state, orderDispatch } = useContext(OrderContext);
   const { data: stripePromise } = state.stripePromise;
   const { data: clientSecret } = state.clientSecret;
-
+  const { state: cartState } = useContext(CartContext);
+  const { cartProducts } = cartState;
   useEffect(() => {
     if (!stripePromise) {
       (async () => {
@@ -31,7 +33,6 @@ function Payment() {
             payload,
           });
         } catch (error) {
-          console.log(error);
           orderDispatch({
             type: STRIPE_PROMISE_ERROR,
             payload: `Payment Error !`,
@@ -45,7 +46,7 @@ function Payment() {
       try {
         (async () => {
           orderDispatch({ type: CLIENT_SECRET_LOADING });
-          const data = await OrderService.getPaymentIntent();
+          const data = await OrderService.getPaymentIntent(cartProducts);
           orderDispatch({
             type: CLIENT_SECRET_LOADED,
             payload: data.clientSecret,

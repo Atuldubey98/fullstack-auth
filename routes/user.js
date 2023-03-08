@@ -12,6 +12,7 @@ userRouter.get("/current", auth, (req, res, next) => {
 userRouter.post("/login", async (req, res, next) => {
   const { email, password } = req.body;
   try {
+    
     const user = await User.findByPk(email);
     if (!user) {
       return res
@@ -85,7 +86,7 @@ userRouter.delete("/remove", auth, async (req, res, next) => {
   }
 });
 
-userRouter.get("/all", auth, async (req, res, next) => {
+userRouter.get("/all", async (req, res, next) => {
   try {
     const users = await User.findAll({ attributes: ["email", "name"] });
     return res.status(200).json({ status: true, users });

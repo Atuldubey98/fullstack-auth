@@ -1,16 +1,16 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import ProductService from "../api/ProductService";
+import CartProducts from "../components/CartProducts";
 import FilterComponent from "../components/FilterComponent";
 import Header from "../components/Header";
+import Loading from "../components/Loading";
 import Product from "../components/Product";
 import { ProductContext } from "../contexts/ProductsContext";
-import { PRODUCTS_LOADED, PRODUCTS_LOADING } from "../reducers/productReducer";
-import PageLayout from "./PageLayout";
-import "./AddProductsPage.css";
 import { UIContext } from "../contexts/UIContext";
-import CartProducts from "../components/CartProducts";
-import Loading from "../components/Loading";
+import { PRODUCTS_LOADED, PRODUCTS_LOADING } from "../reducers/productReducer";
+import "./AddProductsPage.css";
+import PageLayout from "./PageLayout";
 const AddProductsPage = () => {
   const { state, productDispatch } = useContext(ProductContext);
   const { sideCart } = useContext(UIContext);
@@ -44,7 +44,6 @@ const AddProductsPage = () => {
     <PageLayout>
       <Header />
       <FilterComponent pages={pages} />
-
       {loading ? (
         <Loading />
       ) : (
@@ -55,11 +54,9 @@ const AddProductsPage = () => {
             ))}
             {products?.length === 0 && <div>{"No products found"}</div>}
           </div>
-
           {sideCart && <CartProducts />}
         </div>
       )}
-
       {error && <div>{error}</div>}
     </PageLayout>
   );
