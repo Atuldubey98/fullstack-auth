@@ -5,12 +5,11 @@ import "./App.css";
 import PrivateRoute from "./components/PrivateRoute";
 import { UIContext } from "./contexts/UIContext";
 import AddProductsPage from "./pages/AddProductsPage";
+import Completion from "./pages/Completion";
 import { LandingPage } from "./pages/LandingPage";
-import RegisterPage from "./pages/RegisterPage";
 import LoginPage from "./pages/LoginPage";
 import PlaceOrder from "./pages/PlaceOrder";
-import Completion from "./pages/Completion";
-import { ToastContainer } from "react-toastify";
+import RegisterPage from "./pages/RegisterPage";
 
 const App = () => {
   const { theme } = useContext(UIContext);
